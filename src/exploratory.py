@@ -12,22 +12,25 @@ import random
 import matplotlib.cm as cm
 from pathlib import Path
 
-train_path = sys.argv[1]
-validation_path = sys.argv[2]
-plot_path = sys.argv[3]
+train_data_path = sys.argv[1] # train_data_path
+validation_data_path = sys.argv[2] # val data path
+plot_path = sys.argv[3] #  path for stock plots of exploratory
 
-
+print("\n------------ exploratory started -------")
+print("train_data_path", train_data_path)
+print("validation_data_path", validation_data_path)
+print("plot_path", plot_path)
 
  
 Path(plot_path).mkdir(parents=True,exist_ok=True)
 
 
-lists = os.listdir(train_path)
+lists = os.listdir(train_data_path)
 diseases = []
 crops = []
 file_lst = []
 for folder in lists:
-    files = os.listdir(os.path.join(train_path,folder))
+    files = os.listdir(os.path.join(train_data_path,folder))
     files = [folder+'/'+file  for file in files]
     file_lst.extend(files)
     if(folder != 'background'): 
@@ -43,12 +46,12 @@ with plt.style.context('ggplot'):
 #plt.savefig(plot_path.__str__()+"/train.png")  
 plt.savefig(os.path.join(plot_path,"train.png")) 
 
-lists = os.listdir(validation_path)
+lists = os.listdir(validation_data_path)
 diseases = []
 crops = []
 file_lst = []
 for folder in lists:
-    files = os.listdir(os.path.join(validation_path,folder))
+    files = os.listdir(os.path.join(validation_data_path,folder))
     files = [folder+'/'+file  for file in files]
     file_lst.extend(files)
     if(folder != 'background'): 
