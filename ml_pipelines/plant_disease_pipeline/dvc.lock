@@ -1,43 +1,43 @@
 schema: '2.0'
 stages:
   exploratory:
-    cmd: python ./../../src/exploratory.py ./../../data/small_dataset/train/ ./../../data/small_dataset/val/
-      ./../../results/exploratory/exploratory_img/plots/
+    cmd:
+    - python   ../../src/exploratory.py  ../../data/small_dataset/train/  ../../data/small_dataset/val/   ../../ml_pipelines/plant_disease_pipeline/results/exploratory/exploratory_img/plots/
     deps:
-    - path: ./../../data/small_dataset/train/
+    - path: ../../data/small_dataset/train/
       md5: 78a2b630a820eeb1d5edd17f0a0a2e4e.dir
       size: 6179499
       nfiles: 380
-    - path: ./../../data/small_dataset/val/
+    - path: ../../data/small_dataset/val/
       md5: 1b713c456491aad44c92d2f36a10cfb7.dir
       size: 6178051
       nfiles: 380
-    - path: ./../../src/exploratory.py
-      md5: eb570de83b29245434d1f70f192c1b92
-      size: 2236
+    - path: ../../src/exploratory.py
+      md5: de1a4613d27966b13cc9c5709a0da646
+      size: 2514
     outs:
-    - path: ./../../results/exploratory/exploratory_img/plots/train.png
+    - path: ../../ml_pipelines/plant_disease_pipeline/results/exploratory/exploratory_img/plots/train.png
       md5: 9979107f671167d04df844efd6a5d439
       size: 116871
-    - path: ./../../results/exploratory/exploratory_img/plots/valid.png
+    - path: ../../ml_pipelines/plant_disease_pipeline/results/exploratory/exploratory_img/plots/valid.png
       md5: 9979107f671167d04df844efd6a5d439
       size: 116871
   train:
-    cmd: python ./../../src/train.py ./../../data/small_dataset/train/ ./../../data/small_dataset/val/
-      ./../../results/training/keras ./../../results/training/history/history.csv
-      ./../../results/run_info.json
+    cmd:
+    - python   ../../src/train.py   ../../data/small_dataset/train/   ../../data/small_dataset/val/   ../../ml_pipelines/plant_disease_pipeline/results/training/model
+      ../../ml_pipelines/plant_disease_pipeline/results/training/history   ../../ml_pipelines/plant_disease_pipeline/results
     deps:
-    - path: ./../../data/small_dataset/train/
+    - path: ../../data/small_dataset/train/
       md5: 78a2b630a820eeb1d5edd17f0a0a2e4e.dir
       size: 6179499
       nfiles: 380
-    - path: ./../../data/small_dataset/val/
+    - path: ../../data/small_dataset/val/
       md5: 1b713c456491aad44c92d2f36a10cfb7.dir
       size: 6178051
       nfiles: 380
-    - path: ./../../src/train.py
-      md5: 69d3285ae4db64a87fd69c7ad8fff02f
-      size: 4136
+    - path: ../../src/train.py
+      md5: d7b90701d73b25f2e007c9a7ed29474e
+      size: 4814
     params:
       params.yaml:
         train.batch_size: 10
@@ -45,14 +45,14 @@ stages:
         train.momentum: 0.9
         train.nbr_epoch: 1
     outs:
-    - path: ./../../results/run_info.json
-      md5: 6693dfbff2a4f28359193e7db18a199f
-      size: 179
-    - path: ./../../results/training/history/history.csv
-      md5: 714ae4e25f122b41b40dfb536a3ad7fa
-      size: 106
-    - path: ./../../results/training/keras
-      md5: 6c6ab6ef7441f6c3a804dd179c5da7a3.dir
+    - path: ../../ml_pipelines/plant_disease_pipeline/results/run_info.json
+      md5: 71f758610d31a8f4defe264e9dedf536
+      size: 177
+    - path: ../../ml_pipelines/plant_disease_pipeline/results/training/history/history.csv
+      md5: 1062135108ce53a3480ffba9b68e7eb5
+      size: 110
+    - path: ../../ml_pipelines/plant_disease_pipeline/results/training/model
+      md5: 994fbb7f71078caa7efdf01e5c4e507d.dir
       size: 119262140
       nfiles: 9
   evaluate:
