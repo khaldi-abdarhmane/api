@@ -1,3 +1,9 @@
+from logging import warning
+
+# don t print wanrning in console
+import warnings
+warnings.filterwarnings('ignore')
+
 from distutils.command.upload import upload
 import tensorflow as tf
 from utils.params_fct import params_fct

@@ -3,26 +3,30 @@ vars:
   # all path start from the root directory "farmy_cv_mlops" 
   - src:  ../../src
   - data: ../../data/small_dataset
-  - results: ../../ml_pipelines/plant_disease_pipeline/results
+  - results: results
   - res: # results
       tr:
-        history: ../../ml_pipelines/plant_disease_pipeline/results/training/history
-        model  : ../../ml_pipelines/plant_disease_pipeline/results/training/model
+        history: results/training/history
+        model  : results/training/model
 
       exp:
-        plots:   ../../ml_pipelines/plant_disease_pipeline/results/exploratory/exploratory_img/plots
+        plots: results/exploratory/exploratory_img/plots
 
       eval:
-        csv:  ../../ml_pipelines/plant_disease_pipeline/results/evaluate/evaluate_csv
-        plots:   ../../ml_pipelines/plant_disease_pipeline/results/evaluate/evaluate_plt
+        csv: results/evaluate/evaluate_csv
+        plots: results/evaluate/evaluate_plt
  
-
 
 
 stages:
   exploratory:
     cmd: 
       - python   ${src}/exploratory.py  ${data}/train/  ${data}/val/   ${res.exp.plots}/
+      # ${data}/train/ : training data path
+      # ${data}/val/   : validation data path
+      # ${res.exp.plots}/:  the path to stock exploratory artifacts
+      #
+      #
 
     deps:
     -   ${data}/train/
@@ -31,6 +35,7 @@ stages:
     outs:
     -   ${res.exp.plots}/train.png
     -   ${res.exp.plots}/valid.png
+
 
 
 
@@ -55,20 +60,20 @@ stages:
     outs:
     -   ${res.tr.model}
     -   ${res.tr.history}/history.csv
-    -   ${results}/run_info.json     
-
+    -   ${results}/run_info.json     # this file stock some the run id of experiment
 
 
   evaluate:
-    cmd: python   ${src}/evaluate.py   ${results}/training/keras   ${results}/training/history/history.csv  \
-         ${data}/val/   ${results}/evaluate/evaluate_csv/classification_report.csv   data/small_dataset/train/ \
-         ${results}/evaluate/evaluate_csv/confusion_matrix.csv   ${results}/evaluate/evaluate_plt/confusion_matrix_img.png \
-         ${results}/evaluate/evaluate_plt/observing_accuracy_img.png   ${results}/exploratory/exploratory_img/plots/
+    cmd: python   ${src}/evaluate.py   ${res.tr.model}   ${res.tr.history}/history.csv   ${data}/train/   ${data}/val/ \
+         ${res.eval.csv}/   ${res.eval.plots}/   ${res.exp.plots}/  ${results}/run_info.json
+    #comment
+
+ 
     deps:
-    -   ${results}/training/keras
-    -   ${results}/training/history/history.csv
+    -   ${res.tr.model} 
+    -   ${res.tr.history}/history.csv
     -   ${data}/train
-    -   ${data}val
+    -   ${data}/val
     -   ${src}/evaluate.py
     
     outs:

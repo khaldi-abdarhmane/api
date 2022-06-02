@@ -1,3 +1,6 @@
+# don t print wanrning in console
+import warnings
+warnings.filterwarnings('ignore')
 
 import os
 import sys
