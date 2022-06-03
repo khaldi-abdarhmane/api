@@ -2,6 +2,7 @@
 /ml_pipelines/plant_disease_pipeline/train/model/model2.h5
 /ml_pipelines/plant_disease_pipeline/train/history/history.csv
 /ml_pipelines/plant_disease_pipeline/mlruns
+/ml_pipelines/plant_disease_pipeline/results
 /results
 /data
-/src/utils/__pycache__/ 
+/src/utils/__pycache__/

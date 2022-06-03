@@ -1,41 +1,85 @@
+ 
+vars:
+  # all path start from the root directory "farmy_cv_mlops" 
+  - src:  ../../src
+  - data: ../../data/small_dataset
+  - results: results
+  - res: # results
+      tr:
+        history: results/training/history
+        model  : results/training/model
+
+      exp:
+        plots: results/exploratory/exploratory_img/plots
+
+      eval:
+        csv: results/evaluate/evaluate_csv
+        plots: results/evaluate/evaluate_plt
+ 
+
+
 stages:
   exploratory:
-    cmd: python ./../../src/exploratory.py ./../../data/small_dataset/train/ ./../../data/small_dataset/val/ ./../../results/exploratory/exploratory_img/plots/
+    cmd: 
+      - python   ${src}/exploratory.py  ${data}/train/  ${data}/val/   ${res.exp.plots}/
+      # ${data}/train/ : training data path
+      # ${data}/val/   : validation data path
+      # ${res.exp.plots}/:  the path to stock exploratory artifacts
+      #
+      #
+
     deps:
-    - ./../../data/small_dataset/train/
-    - ./../../data/small_dataset/val/
-    - ./../../src/exploratory.py
+    -   ${data}/train/
+    -   ${data}/val/
+    -   ${src}/exploratory.py
     outs:
-    - ./../../results/exploratory/exploratory_img/plots/train.png
-    - ./../../results/exploratory/exploratory_img/plots/valid.png
+    -   ${res.exp.plots}/train.png
+    -   ${res.exp.plots}/valid.png
+
+
+
+
   train:
-    cmd: python ./../../src/train.py ./../../data/small_dataset/train/ ./../../data/small_dataset/val/ ./../../results/training/keras ./../../results/training/history/history.csv ./../../results/run_info.json
+    cmd: 
+      - python   ${src}/train.py   ${data}/train/   ${data}/val/   ${res.tr.model} ${res.tr.history}   ${results}
+      #train_data_path = sys.argv[1] #  traing data path
+      #validation_data_path = sys.argv[2] #  validation data path
+      #output_model_path = sys.argv[3]    # model artifact folder path: where we stock the model 
+      #output_history_path= sys.argv[4]   # history folder path : where we stock this file
+      #run_info_path= sys.argv[5]   #  the path where to save run_info.json :
+   
     deps:
-    - ./../../src/train.py 
-    - ./../../data/small_dataset/train/
-    - ./../../data/small_dataset/val/    
+    -   ${src}/train.py 
+    -   ${data}/train/
+    -   ${data}/val/    
     params:
     - train.batch_size
     - train.learning_rate
     - train.momentum
     - train.nbr_epoch
     outs:
-    - ./../../results/training/keras
-    - ./../../results/training/history/history.csv
-    - ./../../results/run_info.json
+    -   ${res.tr.model}
+    -   ${res.tr.history}/history.csv
+    -   ${results}/run_info.json     # this file stock some the run id of experiment
 
 
   evaluate:
-    cmd: python ./../../src/evaluate.py ./../../results/training/keras ./../../results/training/history/history.csv ./../../data/small_dataset/val/ ./../../results/evaluate/evaluate_csv/classification_report.csv ./../../data/small_dataset/train/ ./../../results/evaluate/evaluate_csv/confusion_matrix.csv ./../../results/evaluate/evaluate_plt/confusion_matrix_img.png ./../../results/evaluate/evaluate_plt/observing_accuracy_img.png ./../../results/exploratory/exploratory_img/plots/
+    cmd: python   ${src}/evaluate.py   ${res.tr.model}   ${res.tr.history}/history.csv   ${data}/train/   ${data}/val/ \
+         ${res.eval.csv}/   ${res.eval.plots}/   ${res.exp.plots}/  ${results}/run_info.json
+    #comment
+
+ 
     deps:
-    - ./../../results/training/keras
-    - ./../../results/training/history/history.csv
-    - ./../../data/small_dataset/train
-    - ./../../data/small_dataset/val
-    - ./../../src/evaluate.py
+    -   ${res.tr.model} 
+    -   ${res.tr.history}/history.csv
+    -   ${data}/train
+    -   ${data}/val
+    -   ${src}/evaluate.py
     
     outs:
-     - ./../../results/evaluate/evaluate_csv/classification_report.csv
-     - ./../../results/evaluate/evaluate_csv/confusion_matrix.csv
-     - ./../../results/evaluate/evaluate_plt/confusion_matrix_img.png 
-     - ./../../results/evaluate/evaluate_plt/observing_accuracy_img.png
+     -   ${results}/evaluate/evaluate_csv/classification_report.csv
+     -   ${results}/evaluate/evaluate_csv/confusion_matrix.csv
+     -   ${results}/evaluate/evaluate_plt/confusion_matrix_img.png 
+     -   ${results}/evaluate/evaluate_plt/observing_accuracy_img.png
+ 
+
