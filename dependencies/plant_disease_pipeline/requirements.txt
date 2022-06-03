@@ -1,0 +1,13 @@
+pillow
+scipy
+tensorflow>=2,<3
+tqdm>=4.41.0,<5
+yaml
+pandas
+numpy
+matplotlib
+scikit-learn
+boto3
+seaborn
+dvc
+"dvc[s3]"
