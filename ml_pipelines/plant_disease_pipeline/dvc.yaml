@@ -1,10 +1,9 @@
  
 vars:
-  # all path start from the root directory "farmy_cv_mlops" 
   - src:  ../../src
   - data: ../../data/small_dataset
   - results: results
-  - res: # results
+  - res: # results  is in ml_pipelines/plant_disease_pipeline/
       tr:
         history: results/training/history
         model  : results/training/model
@@ -22,11 +21,10 @@ stages:
   exploratory:
     cmd: 
       - python   ${src}/exploratory.py  ${data}/train/  ${data}/val/   ${res.exp.plots}/
-      # ${data}/train/ : training data path
-      # ${data}/val/   : validation data path
-      # ${res.exp.plots}/:  the path to stock exploratory artifacts
-      #
-      #
+        # ${data}/train/ : training data path
+        # ${data}/val/   : validation data path
+        # ${res.exp.plots}/:  the path to stock exploratory artifacts
+
 
     deps:
     -   ${data}/train/
@@ -42,12 +40,12 @@ stages:
   train:
     cmd: 
       - python   ${src}/train.py   ${data}/train/   ${data}/val/   ${res.tr.model} ${res.tr.history}   ${results}
-      #train_data_path = sys.argv[1] #  traing data path
-      #validation_data_path = sys.argv[2] #  validation data path
-      #output_model_path = sys.argv[3]    # model artifact folder path: where we stock the model 
-      #output_history_path= sys.argv[4]   # history folder path : where we stock this file
-      #run_info_path= sys.argv[5]   #  the path where to save run_info.json :
-   
+        #train_data_path = sys.argv[1]      #  traing data path
+        #validation_data_path = sys.argv[2] #  validation data path
+        #output_model_path = sys.argv[3]    # where we stock the model artifact produce in train.py
+        #output_history_path= sys.argv[4]   # history folder path : where we stock this file
+        #run_info_path= sys.argv[5]          #  the path where to save run_info.json :
+    
     deps:
     -   ${src}/train.py 
     -   ${data}/train/
@@ -60,13 +58,21 @@ stages:
     outs:
     -   ${res.tr.model}
     -   ${res.tr.history}/history.csv
-    -   ${results}/run_info.json     # this file stock some the run id of experiment
+    -   ${results}/run_info.json     # this file stock the run id of experiment
 
 
   evaluate:
     cmd: python   ${src}/evaluate.py   ${res.tr.model}   ${res.tr.history}/history.csv   ${data}/train/   ${data}/val/ \
          ${res.eval.csv}/   ${res.eval.plots}/   ${res.exp.plots}/  ${results}/run_info.json
-    #comment
+ 
+          #model_artifact_path = sys.argv[1] # the path of model artifact
+          #history_df_path = sys.argv[2]     # the path of history.csv 
+          #train_path = sys.argv[3]          #  train data path
+          #validation_path = sys.argv[4]      #  validation data path
+          #evaluation_csv_artifact_path = sys.argv[5] # the path to stock evaluation csv artifacts 
+          #evaluation_plt_artifact_path = sys.argv[6] # the path to stock evaluation img artifacts
+          #exploratory_artifact_path = sys.argv[7]     # the path of exploratory artifacts
+          #run_info_path=  sys.argv[8]                # the path of run_info.json
 
  
     deps:
@@ -77,9 +83,9 @@ stages:
     -   ${src}/evaluate.py
     
     outs:
-     -   ${results}/evaluate/evaluate_csv/classification_report.csv
-     -   ${results}/evaluate/evaluate_csv/confusion_matrix.csv
-     -   ${results}/evaluate/evaluate_plt/confusion_matrix_img.png 
-     -   ${results}/evaluate/evaluate_plt/observing_accuracy_img.png
+     -   ${res.eval.csv}/classification_report.csv
+     -   ${res.eval.csv}/confusion_matrix.csv
+     -   ${res.eval.plots}/confusion_matrix_img.png 
+     -   ${res.eval.plots}/observing_accuracy_img.png
  
 
