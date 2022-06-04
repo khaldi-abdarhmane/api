@@ -5,4 +5,4 @@
 /ml_pipelines/plant_disease_pipeline/results
 /results
 /data
-/src/utils/__pycache__/
+/src/utils/__pycache__
