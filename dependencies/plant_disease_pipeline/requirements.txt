@@ -9,5 +9,3 @@ matplotlib
 scikit-learn
 boto3
 seaborn
-dvc
-"dvc[s3]"
