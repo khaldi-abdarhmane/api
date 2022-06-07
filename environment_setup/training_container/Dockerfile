@@ -9,3 +9,5 @@ COPY requirements.txt .
 RUN conda install --file requirements.txt
 RUN conda install -c conda-forge mlflow
 RUN rm -rf requirements.txt
+RUN pip install dvc
+RUN pip install "dvc[s3]"
