@@ -10,5 +10,4 @@ RUN pip install -r requirements.txt
 RUN conda install -c conda-forge mlflow
 RUN conda install Pillow
 WORKDIR /api
-ENTRYPOINT [ "python" ] 
-CMD [ "app.py" ]
+# CMD [ "python app.py" ]
