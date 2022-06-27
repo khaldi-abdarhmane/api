@@ -13,4 +13,4 @@ RUN pip install tensorflow==2.8.0
 RUN conda install -c conda-forge mlflow
 RUN conda install Pillow
 WORKDIR /usr/src/app/api
-# CMD python app.py
+CMD python app.py
