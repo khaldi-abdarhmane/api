@@ -9,5 +9,5 @@ COPY . .
 RUN pip install -r requirements.txt
 RUN conda install -c conda-forge mlflow
 RUN conda install Pillow
-WORKDIR /api
-# CMD [ "python app.py" ]
+WORKDIR /usr/src/app/api
+CMD [ "python app.py" ]
