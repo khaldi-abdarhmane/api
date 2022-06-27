@@ -6,5 +6,5 @@ RUN chmod +x workstation.sh
 RUN ./workstation.sh
 WORKDIR /usr/src/app
 COPY . .
-RUN conda install --file requirements.txt
+RUN pip install -r requirements.txt
 RUN conda install -c conda-forge mlflow
