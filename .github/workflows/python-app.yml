@@ -31,6 +31,8 @@ jobs:
     - name: cp requerement txt
       run: |
         cp model_mlflow/requirements.txt api_contener
+        cp . api_contener
+        
         
          
    

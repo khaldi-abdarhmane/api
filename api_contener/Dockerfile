@@ -8,4 +8,3 @@ WORKDIR /usr/src/app
 COPY . .
 RUN pip install -r requirements.txt
 RUN conda install -c conda-forge mlflow
-COPY .. .
