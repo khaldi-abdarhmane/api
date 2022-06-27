@@ -31,7 +31,11 @@ jobs:
     - name: cp requerement txt
       run: |
         cp model_mlflow/requirements.txt api_contener
-        cp -r . api_contener
+        cp app.py api_contener/api
+        cp -r uploads api_contener/api 
+        cp -r static api_contener/api
+        cp -r templates api_contener/api
+        cp -r model_mlflow api_contener/api   
         
         
          
