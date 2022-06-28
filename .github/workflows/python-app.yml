@@ -30,6 +30,7 @@ jobs:
         ls -la
     - name: cp requerement txt
       run: |
+        mkdir api_contener
         mkdir api_contener/api
         cp model_mlflow/requirements.txt api_contener
         cp API/app.py api_contener/api
