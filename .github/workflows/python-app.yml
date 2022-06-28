@@ -38,7 +38,9 @@ jobs:
         cp -r API/uploads api_contener/api 
         cp -r API/static api_contener/api
         cp -r API/templates api_contener/api
-        cp -r model_mlflow api_contener/api   
+        cp -r model_mlflow api_contener/api
+        ls -la api_contener 
+        ls -la api_contener/api    
         
         
          
@@ -56,5 +58,5 @@ jobs:
       run: |
         # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./environment_setup/training_container
         # docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker build -t khaldi22/api_imag:latest api_contener
-          docker push khaldi22/api_imag:latest 
+        # docker build -t khaldi22/api_imag:latest api_contener
+        # docker push khaldi22/api_imag:latest 
