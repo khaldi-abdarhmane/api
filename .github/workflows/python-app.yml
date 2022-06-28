@@ -34,8 +34,8 @@ jobs:
         mkdir api_contener/api
         ls -la
         cp model_mlflow/requirements.txt api_contener
-        # cp API/app.py api_contener/api
-        # cp -r API/uploads api_contener/api 
+        cp API/app.py api_contener/api
+        cp -r API/uploads api_contener/api 
         # cp -r API/static api_contener/api
         # cp -r API/templates api_contener/api
         # cp -r API/model_mlflow api_contener/api   
