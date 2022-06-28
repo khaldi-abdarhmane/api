@@ -26,7 +26,6 @@ jobs:
 
     - name: telchage model
       run: |
-        pip install gsutil
         gsutil cp -r gs://mlflow-esi/model_mlflow .
         ls -la
     - name: cp requerement txt
