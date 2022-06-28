@@ -38,7 +38,7 @@ jobs:
         cp -r API/uploads api_contener/api 
         cp -r API/static api_contener/api
         cp -r API/templates api_contener/api
-        cp -r API/model_mlflow api_contener/api   
+        # cp -r API/model_mlflow api_contener/api   
         
         
          
