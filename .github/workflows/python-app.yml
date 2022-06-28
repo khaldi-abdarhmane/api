@@ -33,6 +33,7 @@ jobs:
         mkdir api_contener
         mkdir api_contener/api
         ls -la
+        cp environment_setup/api_contener/* api_contener
         cp model_mlflow/requirements.txt api_contener
         cp API/app.py api_contener/api
         cp -r API/uploads api_contener/api 
