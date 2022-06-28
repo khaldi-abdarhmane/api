@@ -32,28 +32,29 @@ jobs:
       run: |
         mkdir api_contener
         mkdir api_contener/api
-        cp model_mlflow/requirements.txt api_contener
-        cp API/app.py api_contener/api
-        cp -r API/uploads api_contener/api 
-        cp -r API/static api_contener/api
-        cp -r API/templates api_contener/api
-        cp -r API/model_mlflow api_contener/api   
+        ls -la
+        # cp model_mlflow/requirements.txt api_contener
+        # cp API/app.py api_contener/api
+        # cp -r API/uploads api_contener/api 
+        # cp -r API/static api_contener/api
+        # cp -r API/templates api_contener/api
+        # cp -r API/model_mlflow api_contener/api   
         
         
          
    
-    - name: Login to DockerHub
-      uses: docker/login-action@v2
-      with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build, tag, and push image to Amazon ECR
-      env:
-        # ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: training_imag
-        IMAGE_TAG: latest
-      run: |
-        # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./environment_setup/training_container
-        # docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker build -t khaldi22/api_imag:latest api_contener
-          docker push khaldi22/api_imag:latest 
+    # - name: Login to DockerHub
+    #   uses: docker/login-action@v2
+    #   with:
+    #       username: ${{ secrets.DOCKERHUB_USERNAME }}
+    #       password: ${{ secrets.DOCKERHUB_TOKEN }}
+    # - name: Build, tag, and push image to Amazon ECR
+    #   env:
+    #     # ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+    #     ECR_REPOSITORY: training_imag
+    #     IMAGE_TAG: latest
+    #   run: |
+    #     # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./environment_setup/training_container
+    #     # docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    #       docker build -t khaldi22/api_imag:latest api_contener
+    #       docker push khaldi22/api_imag:latest 
