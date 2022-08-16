@@ -1,36 +1,26 @@
 
 from __future__ import division, print_function
 # coding=utf-8
-
+from bib import upload_my_file,hash_my_file
 import os
-
 import numpy as np
-
 # Keras
 from tensorflow.keras.preprocessing.image import load_img,img_to_array,array_to_img
-
 from tensorflow.keras.models import Model,load_model
-
-# Flask utils
-from flask import Flask, redirect, url_for, request, render_template
 from werkzeug.utils import secure_filename
 # from gevent.pywsgi import WSGIServer
 import mlflow
 import warnings
+from fastapi import FastAPI, File, UploadFile
+import random
+import shutil
+
 warnings.filterwarnings('ignore')
 # Define a flask app
-app = Flask(__name__)
+app = FastAPI()
 model= mlflow.keras.load_model("model_mlflow")
-
-
 print(model.summary())
 # model._make_predict_function()          # Necessary
-
-@app.route('/', methods=['GET'])
-def index():
-    # Main page
-    return render_template('index.html')
-
 
 
 @app.route('/predict', methods=['GET', 'POST'])
@@ -51,6 +41,24 @@ def upload():
         
         return preds.__str__()
     return "dfsdf"
+@app.post("/files/")
+async def create_file(file: bytes = File()):
+    return {"file_size": len(file)}
+
+
+
+file_dest = 'uploads/destination'  
+f_dest = open(file_dest, 'wb')
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile):
+
+    ##################step1#############################################
+    shutil.copyfileobj(file.file, f_dest) 
+    file_binary = open(f_dest, "rb").read()
+    upload_my_file("dataset-farmy-pipline", "dataprod",file_binary , hash_my_file("./destination").__str__()+".png")
+    return {"filename": hash_my_file("./destination")}
+    ##################fin-step1#############################################
+
 
 
 def prepare_image_for_prediction(img_path, size = (224,224)):

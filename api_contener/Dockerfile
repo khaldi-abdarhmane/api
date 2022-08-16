@@ -12,5 +12,7 @@ RUN pip install numpy
 RUN pip install tensorflow==2.8.0
 RUN conda install -c conda-forge mlflow
 RUN conda install Pillow
+RUN pip install fastapi
+RUN pip install uvicorn
 WORKDIR /usr/src/app/api
-CMD python app.py
+CMD uvicorn app:app --reload
