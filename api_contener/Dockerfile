@@ -14,5 +14,6 @@ RUN pip install numpy
 # RUN conda install Pillow
 RUN pip install fastapi
 RUN pip install uvicorn
+RUN pip install boto3
 WORKDIR /usr/src/app/api
 CMD uvicorn app:app --reload
