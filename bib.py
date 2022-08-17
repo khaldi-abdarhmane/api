@@ -17,20 +17,16 @@ def upload_my_file(bucket, folder, file_as_binary, file_name):
             print(e)
             return False
         return True
-
-
+    
 
 hasher = hashlib.md5()
 def hash_my_file(pathtxt):
      BLOCKSIZE = 65536
-     with open('./destination', 'rb') as afile:
+     with open(pathtxt, 'rb') as afile:
           buf = afile.read(BLOCKSIZE)
           while len(buf) > 0:
             hasher.update(buf)
             buf = afile.read(BLOCKSIZE)
      return hasher.hexdigest()
 
-#get file as binary
-file_binary = open("./destination", "rb").read()
-#uploading file
-upload_my_file("dataset-farmy-pipline", "dataprod", file_binary, "test.py")
+
