@@ -42,6 +42,10 @@ app = FastAPI()
 #         return preds.__str__()
 #     return "dfsdf"
 
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
 @app.post("/files/")
 async def create_file(file: bytes = File()):
     return {"file_size": len(file)}
