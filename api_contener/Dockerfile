@@ -16,5 +16,6 @@ RUN pip install fastapi
 RUN pip install uvicorn
 RUN pip install boto3
 RUN pip install werkzeug
-WORKDIR /usr/src/app/api
+RUN pip install python-multipart
+WORKDIR /usr/src/app/api   
 CMD uvicorn app:app --reload
