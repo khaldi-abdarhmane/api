@@ -18,4 +18,4 @@ RUN pip install boto3
 RUN pip install werkzeug
 RUN pip install python-multipart
 WORKDIR /usr/src/app/api   
-CMD uvicorn app:app --reload
+CMD uvicorn app:app --host 0.0.0.0 --port 8000
