@@ -21,7 +21,7 @@ warnings.filterwarnings('ignore')
 app = FastAPI()
 model= mlflow.keras.load_model("model_mlflow")
 print(model.summary())
-model._make_predict_function()          # Necessary
+# model._make_predict_function()          # Necessary
 
 
 # @app.route('/predict', methods=['GET', 'POST'])

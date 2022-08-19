@@ -1,11 +1,10 @@
 FROM continuumio/miniconda3:latest
-RUN mkdir -p /scripts
-COPY workstation.sh /scripts
-WORKDIR /scripts
-RUN chmod +x workstation.sh
-RUN ./workstation.sh
-WORKDIR /usr/src/app
-COPY . .
+# RUN mkdir -p /scripts
+# COPY workstation.sh /scripts
+# WORKDIR /scripts
+# RUN chmod +x workstation.sh
+# RUN ./workstation.sh
+
 # RUN pip install mlflow
 # RUN pip install flask
 RUN pip install numpy
@@ -21,5 +20,7 @@ RUN conda install Pillow
 RUN pip install mlflow
 RUN conda install -c conda-forge uvicorn
 RUN conda install -c conda-forge tensorflow
+WORKDIR /usr/src/app
+COPY . .
 WORKDIR /usr/src/app/api   
 CMD python app.py
