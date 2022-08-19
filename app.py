@@ -6,11 +6,11 @@ from bib import upload_my_file,hash_my_file
 import os
 import numpy as np
 # Keras
-# from tensorflow.keras.preprocessing.image import load_img,img_to_array,array_to_img
-# from tensorflow.keras.models import Model,load_model
+from tensorflow.keras.preprocessing.image import load_img,img_to_array,array_to_img
+from tensorflow.keras.models import Model,load_model
 from werkzeug.utils import secure_filename
 # from gevent.pywsgi import WSGIServer
-# import mlflow
+import mlflow
 import warnings
 from fastapi import FastAPI, File, UploadFile
 import random
@@ -19,9 +19,9 @@ import shutil
 warnings.filterwarnings('ignore')
 # Define a flask app
 app = FastAPI()
-# model= mlflow.keras.load_model("model_mlflow")
-# print(model.summary())
-# model._make_predict_function()          # Necessary
+model= mlflow.keras.load_model("model_mlflow")
+print(model.summary())
+model._make_predict_function()          # Necessary
 
 
 # @app.route('/predict', methods=['GET', 'POST'])
