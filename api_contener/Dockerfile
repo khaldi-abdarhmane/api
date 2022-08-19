@@ -17,5 +17,8 @@ RUN pip install uvicorn
 RUN pip install boto3
 RUN pip install werkzeug
 RUN pip install python-multipart
+RUN conda install Pillow
+RUN pip install tensorflow==2.8.0
+RUN pip install mlflow
 WORKDIR /usr/src/app/api   
 CMD uvicorn app:app --host 0.0.0.0 --port 8000
