@@ -18,8 +18,8 @@ RUN pip install boto3
 RUN pip install werkzeug
 RUN pip install python-multipart
 RUN conda install Pillow
-RUN pip install tensorflow==2.8.0
 RUN pip install mlflow
 RUN conda install -c conda-forge uvicorn
+RUN conda install -c conda-forge tensorflow
 WORKDIR /usr/src/app/api   
 CMD python app.py
