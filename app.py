@@ -1,6 +1,7 @@
 
 from __future__ import division, print_function
 # coding=utf-8
+import uvicorn
 from bib import upload_my_file,hash_my_file
 import os
 import numpy as np
@@ -18,8 +19,8 @@ import shutil
 warnings.filterwarnings('ignore')
 # Define a flask app
 app = FastAPI()
-model= mlflow.keras.load_model("model_mlflow")
-print(model.summary())
+# model= mlflow.keras.load_model("model_mlflow")
+# print(model.summary())
 # model._make_predict_function()          # Necessary
 
 
@@ -83,4 +84,5 @@ def predict_class(image_path):
   index_max = result.argmax(axis=1)[0]
   return index_max.__str__()
     
-   
+if __name__ == '__main__':
+    uvicorn.run(app, port=8080, host='0.0.0.0')   
