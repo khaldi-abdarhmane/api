@@ -19,18 +19,18 @@ jobs:
       uses: actions/checkout@v2
 
 
-    # - name: telchage model
-    #   run: |
-    #     gsutil cp -r gs://mlflow-esi/model_mlflow .
-    #     ls -la
-    - name: cp requerement txt
-    ## cp model_mlflow/requirements.txt api_contener
-    #cp -r model_mlflow api_contener/api   
+    - name: telchage model
       run: |
-
+        gsutil cp -r gs://mlflow-esi/model_mlflow .
+        ls -la
+    - name: cp requerement txt
+ 
+      run: |
+        cp model_mlflow/requirements.txt api_contener
         cp app.py api_contener/api
         cp bib.py api_contener/api
         cp -r uploads api_contener/api 
+        cp -r model_mlflow api_contener/api
    
         
         
