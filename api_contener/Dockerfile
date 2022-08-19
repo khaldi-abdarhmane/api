@@ -22,4 +22,4 @@ RUN pip install tensorflow==2.8.0
 RUN pip install mlflow
 RUN conda install -c conda-forge uvicorn
 WORKDIR /usr/src/app/api   
-CMD uvicorn app:app --host 0.0.0.0 --port 8000
+CMD python app.py
